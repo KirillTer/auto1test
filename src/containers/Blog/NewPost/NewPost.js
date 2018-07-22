@@ -10,7 +10,7 @@ class NewPost extends Component {
         lastname: '',
         email: '',
         phone: '',
-        hasPremium: false
+        hasPremium: 'No'
     }
 
     componentDidMount () {
@@ -28,7 +28,7 @@ class NewPost extends Component {
         };
         axios.post( '/merchants.json', data )
             .then( response => {
-                console.log( response );
+                // console.log( response );
                 this.props.history.replace('/posts');
                 // this.setState( { submitted: true } );
             } );
@@ -53,8 +53,8 @@ class NewPost extends Component {
                 <input type="text" value={this.state.phone} onChange={( event ) => this.setState( { phone: event.target.value } )} />
                 <label>Premium</label>
                 <select value={this.state.hasPremium} onChange={( event ) => this.setState( { hasPremium: event.target.value } )}>
-                    <option value="false">NO</option>
-                    <option value="true">YES</option>
+                    <option value="No">NO</option>
+                    <option value="Yes">YES</option>
                 </select>
                 <button onClick={this.postDataHandler}>Add Merchant</button>
             </div>

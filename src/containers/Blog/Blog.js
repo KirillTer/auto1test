@@ -29,12 +29,12 @@ class Blog extends Component {
                                 activeStyle={{
                                     color: '#fa923f',
                                     textDecoration: 'underline'
-                                }}>Posts</NavLink></li>
+                                }}>Merchants</NavLink></li>
                             <li><NavLink to={{
                                 pathname: '/new-post',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
-                            }}>New Post</NavLink></li>
+                            }}>New Merchant</NavLink></li>
                         </ul>
                     </nav>
                 </header>
