@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../store/actions'
 
 import './FullPost.css';
 
@@ -37,6 +39,7 @@ class FullPost extends Component {
         axios.delete('/merchants/' + this.props.match.params.id + '.json')
             .then(response => {
                 // console.log(response);
+                this.props.onMerchantRemoved(this.props.match.params.id);
                 this.props.history.replace('/posts');
             });
     }
@@ -67,4 +70,10 @@ class FullPost extends Component {
     }
 }
 
-export default FullPost;
+const mapDispatchToProps = dispatch => {
+    return {
+        onMerchantRemoved: (id) => dispatch({type: actionTypes.REMOVE_MERCHANT, payload: id})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(FullPost);

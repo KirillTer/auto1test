@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
 import { Redirect } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import * as actionTypes from '../../../store/actions'
 import './NewPost.css';
 
 class NewPost extends Component {
@@ -28,7 +29,11 @@ class NewPost extends Component {
         };
         axios.post( '/merchants.json', data )
             .then( response => {
-                // console.log( response );
+                // console.log('From New Post data', data );
+                // console.log('From New Post response', response );
+                let passedMerchant = {...data};
+                passedMerchant['id'] = response.data.name;
+                this.props.onMerchantAdded(passedMerchant);
                 this.props.history.replace('/posts');
                 // this.setState( { submitted: true } );
             } );
@@ -62,4 +67,10 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost;
+const mapDispatchToProps = dispatch => {
+    return {
+        onMerchantAdded: (merchant) => dispatch({type: actionTypes.ADD_MERCHANT, payload: merchant})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewPost);
