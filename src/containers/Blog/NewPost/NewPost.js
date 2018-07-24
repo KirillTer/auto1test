@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../../axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions'
+import { addMerchant } from '../../../store/actions'
 import './NewPost.css';
 
 class NewPost extends Component {
@@ -69,7 +69,7 @@ class NewPost extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onMerchantAdded: (merchant) => dispatch({type: actionTypes.ADD_MERCHANT, payload: merchant})
+        onMerchantAdded: (merchant) => dispatch(addMerchant(merchant))
     }
 }
 

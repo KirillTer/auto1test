@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions'
+import { removeMerchant } from '../../../store/actions'
 
 import './FullPost.css';
 
@@ -72,7 +72,7 @@ class FullPost extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onMerchantRemoved: (id) => dispatch({type: actionTypes.REMOVE_MERCHANT, payload: id})
+        onMerchantRemoved: (id) => dispatch(removeMerchant(id))
     }
 }
 

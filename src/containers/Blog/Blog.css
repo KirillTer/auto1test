@@ -16,8 +16,12 @@
     color: black;
 }
 
-.Blog a:hover,
+.Blog a:hover {
+    color: #fa923f;
+}
+
 .Blog a:active,
 .Blog a.active {
     color: #fa923f;
+    text-decoration: underline;
 }
