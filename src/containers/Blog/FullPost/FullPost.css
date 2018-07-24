@@ -1,9 +1,13 @@
 .FullPost {
     width: 80%;
-    margin: 20px auto;
+    margin: 10px auto;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     text-align: center;
+}
+
+.FullPost p {
+    display: inline-block;
 }
 
 .Edit {
@@ -21,6 +25,7 @@
     cursor: pointer;
     outline: none;
     color: #fa923f;
+    font-size: large;
 }
 
 .Edit button:hover,
@@ -28,8 +33,17 @@
     color: #521751;
 }
 
+.Edit button.Edit {
+    color: green;
+}
+
 .Edit button.Delete {
     color: red;
+}
+
+.Edit button.Edit:hover,
+.Edit button.Edit:active {
+    color: darkgreen;
 }
 
 .Edit button.Delete:hover,
