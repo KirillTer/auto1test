@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from '../../../axios';
 import { connect } from 'react-redux';
-import { removeMerchant } from '../../../store/actions'
+import { removeMerchant, updateMerchant } from '../../../store/actions'
 
 import './FullPost.css';
 
@@ -62,9 +62,13 @@ class FullPost extends Component {
         } );
         axios.put( '/merchants/' + this.props.match.params.id + '.json', this.state.loadedPost )
             .then( response => {
-                // console.log('From New Post data', data );
-                console.log('From New PUT response', response );
+                // console.log('From New PUT response', response );
                 // this.props.history.replace('/posts');
+                let passedMerchant = {...response.data};
+                passedMerchant['id'] = this.props.match.params.id;
+                // console.log('passedMerchant', passedMerchant );
+                this.props.onMerchantUpdated(passedMerchant);
+                this.props.history.replace('/posts');
             } );
     }
 
@@ -171,7 +175,8 @@ class FullPost extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onMerchantRemoved: (id) => dispatch(removeMerchant(id))
+        onMerchantRemoved: (id) => dispatch(removeMerchant(id)),
+        onMerchantUpdated: (merchant) => dispatch(updateMerchant(merchant))
     }
 }
 

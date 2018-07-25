@@ -1,6 +1,6 @@
 .FullPost {
     width: 80%;
-    margin: 10px auto;
+    margin: 5px auto;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
     text-align: center;
@@ -10,8 +10,8 @@
     display: inline-block;
 }
 
-.Edit {
-
+.FullPost div {
+    margin: 20px auto;
 }
 
 .Edit label {
@@ -44,9 +44,11 @@
 .Edit button.Edit:hover,
 .Edit button.Edit:active {
     color: darkgreen;
+    text-decoration: underline;
 }
 
 .Edit button.Delete:hover,
 .Edit button.Delete:active {
     color: darkred;
+    text-decoration: underline;
 }
