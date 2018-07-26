@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../../axios';
 import { connect } from 'react-redux';
 import { removeMerchant, updateMerchant } from '../../../store/actions'
+import { validator } from '../../../components/Validator/Validator'
 
 import './FullPost.css';
 
@@ -18,28 +19,28 @@ class FullPost extends Component {
     }
 
     componentDidMount () {
-        // console.log(this.props);
-        this.loadData();
+        this.loadChecker();
     }
 
     componentDidUpdate() {
-        this.loadData();
+        this.loadChecker();
+    }
+
+    loadChecker () {
+        if ( this.props.match.params.id ) {
+            if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id) ) {
+                this.loadData();
+            }
+        }
     }
 
     loadData () {
-        if ( this.props.match.params.id ) {
-            // console.log('this.props.match.params.id',this.props.match.params.id);
-            // console.log('this.state.loadedPost',this.state.loadedPost);
-            if ( !this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id) ) {
-                axios.get( '/merchants/' + this.props.match.params.id + '.json' )
-                    .then( response => {
-                        // console.log('response',response);
-                        let post = response.data;
-                        post['id'] = this.props.match.params.id;
-                        this.setState( { loadedPost: post } );
-                    } );
-            }
-        }
+        axios.get( '/merchants/' + this.props.match.params.id + '.json' )
+            .then( response => {
+                let post = response.data;
+                post['id'] = this.props.match.params.id;
+                this.setState( { loadedPost: post } );
+            } );
     }
 
     editPostHandler = () => {
@@ -49,7 +50,6 @@ class FullPost extends Component {
     deletePostHandler = () => {
         axios.delete('/merchants/' + this.props.match.params.id + '.json')
             .then(response => {
-                // console.log(response);
                 this.props.onMerchantRemoved(this.props.match.params.id);
                 this.props.history.replace('/posts');
             });
@@ -62,13 +62,11 @@ class FullPost extends Component {
         } );
         axios.put( '/merchants/' + this.props.match.params.id + '.json', this.state.loadedPost )
             .then( response => {
-                // console.log('From New PUT response', response );
                 // this.props.history.replace('/posts');
                 let passedMerchant = {...response.data};
                 passedMerchant['id'] = this.props.match.params.id;
-                // console.log('passedMerchant', passedMerchant );
                 this.props.onMerchantUpdated(passedMerchant);
-                this.props.history.replace('/posts');
+                this.loadData();
             } );
     }
 
@@ -77,6 +75,7 @@ class FullPost extends Component {
     }
 
     handleInputs = (obj) => {
+        console.log(validator(obj));
         this.setState( (state) => ({ loadedPost: { ...state.loadedPost, ...obj }}));
     }
 

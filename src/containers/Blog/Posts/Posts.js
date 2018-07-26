@@ -14,7 +14,6 @@ class Posts extends Component {
     }
 
     componentDidMount () {
-        // console.log(this.props);
         this.loadData();
     }
 
@@ -27,15 +26,11 @@ class Posts extends Component {
         if ( this.state.merchants.length === 0 ) {
             axios.get( '/merchants.json' )
                 .then( response => {
-                    // console.log('!!!', response );
                     uploadedMerchants = Object.values(response.data);
                     for (let i = 0; i < uploadedMerchants.length; i++) {
-                        // console.log('response.data[i]', Object.keys(response.data)[i]);
                         uploadedMerchants[i]['id'] = Object.keys(response.data)[i];
                     }
-                    // console.log('posts', posts );
                     this.setState( { merchants: uploadedMerchants } );
-                    // console.log( response );
                 } )
                 .catch( error => {
                     console.log( error );

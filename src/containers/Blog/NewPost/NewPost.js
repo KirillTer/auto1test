@@ -14,11 +14,6 @@ class NewPost extends Component {
         hasPremium: 'No'
     }
 
-    componentDidMount () {
-        // If unauth => this.props.history.replace('/posts');
-        console.log( this.props );
-    }
-
     postDataHandler = () => {
         const data = {
             firstname: this.state.firstname,
@@ -29,8 +24,6 @@ class NewPost extends Component {
         };
         axios.post( '/merchants.json', data )
             .then( response => {
-                // console.log('From New Post data', data );
-                // console.log('From New Post response', response );
                 let passedMerchant = {...data};
                 passedMerchant['id'] = response.data.name;
                 this.props.onMerchantAdded(passedMerchant);
