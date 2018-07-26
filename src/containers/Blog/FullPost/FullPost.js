@@ -76,34 +76,8 @@ class FullPost extends Component {
         this.setState( { isEditing: !this.state.isEditing } );
     }
 
-    handleChangeFirstname = (event) => {
-        // console.log('event.target.value', event.target.value);
-        const value = event.target.value
-        this.setState( (state) => ({ loadedPost: { ...state.loadedPost, firstname: value }}));
-    }
-
-    handleChangeLastname = (event) => {
-        // console.log('event.target.value', event.target.value);
-        const value = event.target.value
-        this.setState( (state) => ({ loadedPost: { ...state.loadedPost, lastname: value }}));
-    }
-
-    handleChangeEmail = (event) => {
-        // console.log('event.target.value', event.target.value);
-        const value = event.target.value
-        this.setState( (state) => ({ loadedPost: { ...state.loadedPost, email: value }}));
-    }
-
-    handleChangePhone = (event) => {
-        // console.log('event.target.value', event.target.value);
-        const value = event.target.value
-        this.setState( (state) => ({ loadedPost: { ...state.loadedPost, phone: value }}));
-    }
-
-    handleChangeHasPremium = (event) => {
-        // console.log('event.target.value', event.target.value);
-        const value = event.target.value
-        this.setState( (state) => ({ loadedPost: { ...state.loadedPost, hasPremium: value }}));
+    handleInputs = (obj) => {
+        this.setState( (state) => ({ loadedPost: { ...state.loadedPost, ...obj }}));
     }
 
     render () {
@@ -139,23 +113,23 @@ class FullPost extends Component {
                         <h1>Edit Merchant</h1>
                         <div>
                             <label>Firstname</label>
-                            <input type="text" value={this.state.loadedPost.firstname} onChange={this.handleChangeFirstname} />
+                            <input type="text" value={this.state.loadedPost.firstname} onChange={e => {this.handleInputs({firstname: e.target.value})}} />
                         </div>
                         <div>
                             <label>Lastname</label>
-                            <input rows="text" value={this.state.loadedPost.lastname} onChange={this.handleChangeLastname} />
+                            <input rows="text" value={this.state.loadedPost.lastname} onChange={e => {this.handleInputs({lastname: e.target.value})}} />
                         </div>
                         <div>
                             <label>Email</label>
-                            <input type="text" value={this.state.loadedPost.email} onChange={this.handleChangeEmail} />
+                            <input type="text" value={this.state.loadedPost.email} onChange={e => {this.handleInputs({email: e.target.value})}} />
                         </div>
                         <div>
                             <label>Phone</label>
-                            <input type="text" value={this.state.loadedPost.phone} onChange={this.handleChangePhone} />
+                            <input type="text" value={this.state.loadedPost.phone} onChange={e => {this.handleInputs({phone: e.target.value})}} />
                         </div>
                         <div>
                             <label>Premium</label>
-                            <select value={this.state.loadedPost.hasPremium} onChange={this.handleChangeHasPremium} >
+                            <select value={this.state.loadedPost.hasPremium} onChange={e => {this.handleInputs({hasPremium: e.target.value})}} >
                                 <option value="No">NO</option>
                                 <option value="Yes">YES</option>
                             </select>
